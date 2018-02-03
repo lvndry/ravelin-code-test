@@ -46,14 +46,14 @@
 			"dataMode": "raw",
 			"version": 2,
 			"auth": null,
-			"time": 1517513218262,
+			"time": 1517613112083,
 			"name": "user2resize",
 			"description": "",
 			"collectionId": "8ec29cda-44c4-b779-4c92-219e25a2af10",
 			"responses": [],
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n\t\"websiteURL\": \"http://ravelin.com\",\n\t\"sessionId\": \"123-123-125\",\n\t\"resizeFrom\": {\n\t\t\"width\": \"741\",\n\t\t\"heigth\": \"147\"\n\t},\n\t\"resizeTo\": {\n\t\t\"width\": \"852\",\n\t\t\"heigth\": \"258\"\n\t}\n}"
+			"rawModeData": "{\n\t\"websiteURL\": \"http://ravelin.com\",\n\t\"sessionId\": \"123-123-125\",\n\t\"resizeFrom\": {\n\t\t\"width\": \"741\",\n\t\t\"height\": \"147\"\n\t},\n\t\"resizeTo\": {\n\t\t\"width\": \"852\",\n\t\t\"height\": \"258\"\n\t}\n}"
 		},
 		{
 			"id": "0cc3bb92-1acb-e067-bcaa-2790a0efd5dc",
@@ -76,14 +76,14 @@
 			"dataMode": "raw",
 			"version": 2,
 			"auth": null,
-			"time": 1517513465147,
+			"time": 1517613125045,
 			"name": "user3resize",
 			"description": "",
 			"collectionId": "8ec29cda-44c4-b779-4c92-219e25a2af10",
 			"responses": [],
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n\t\"websiteURL\": \"http://example.com\",\n\t\"sessionId\": \"123-123-125\",\n\t\"resizeFrom\": {\n\t\t\"width\": \"956\",\n\t\t\"heigth\": \"658\"\n\t},\n\t\"resizeTo\": {\n\t\t\"width\": \"745\",\n\t\t\"heigth\": \"258\"\n\t}\n}"
+			"rawModeData": "{\n\t\"websiteURL\": \"http://example.com\",\n\t\"sessionId\": \"123-123-125\",\n\t\"resizeFrom\": {\n\t\t\"width\": \"956\",\n\t\t\"height\": \"658\"\n\t},\n\t\"resizeTo\": {\n\t\t\"width\": \"745\",\n\t\t\"height\": \"258\"\n\t}\n}"
 		},
 		{
 			"id": "2c7657be-6924-73ab-8ecf-0785739acba2",
@@ -341,23 +341,22 @@
 			],
 			"url": "http://localhost:8080/resize",
 			"queryParams": [],
+			"events": [],
 			"pathVariables": {},
 			"pathVariableData": [],
-			"events": [],
-			"auth": null,
 			"method": "POST",
-			"collectionId": "8ec29cda-44c4-b779-4c92-219e25a2af10",
 			"data": [],
 			"dataMode": "raw",
+			"version": 2,
+			"auth": null,
+			"time": 1517613173280,
 			"name": "user1resize",
 			"description": "",
-			"descriptionFormat": "html",
-			"time": 1517513074431,
-			"version": 2,
+			"collectionId": "8ec29cda-44c4-b779-4c92-219e25a2af10",
 			"responses": [],
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n\t\"websiteURL\": \"http://ravelin.com\",\n\t\"sessionId\": \"123-123-123123123\",\n\t\"resizeFrom\": {\n\t\t\"width\": \"789\",\n\t\t\"heigth\": \"987\"\n\t},\n\t\"resizeTo\": {\n\t\t\"width\": \"456\",\n\t\t\"heigth\": \"654\"\n\t}\n}"
+			"rawModeData": "{\n\t\"websiteURL\": \"http://ravelin.com\",\n\t\"sessionId\": \"123-123-123123123\",\n\t\"resizeFrom\": {\n\t\t\"width\": \"789\",\n\t\t\"height\": \"987\"\n\t},\n\t\"resizeTo\": {\n\t\t\"width\": \"456\",\n\t\t\"height\": \"654\"\n\t}\n}"
 		},
 		{
 			"id": "d6d122e2-95d1-0cb9-ebb3-0318107201bf",

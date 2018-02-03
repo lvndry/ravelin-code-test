@@ -5,6 +5,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"html/template"
 	"io/ioutil"
@@ -12,15 +13,6 @@ import (
 	"net/http"
 	"os"
 	"time"
-)
-
-var (
-	Clients = make(map[string]*websiteData) //[url]map[sess]Data
-	Version = "0.0.1"
-)
-
-const (
-	PORT = ":8080"
 )
 
 type websiteData map[string]Data //map[sess]Data
@@ -36,36 +28,52 @@ type Data struct {
 
 type Dimension struct {
 	Width  string `json:"width"`
-	Height string `json:"heigth"`
+	Height string `json:"height"`
 }
 
+const (
+	PORT = ":8080"
+)
+
+var (
+	Clients = make(map[string]*websiteData) //[url]map[sess]Data
+	Version = "0.0.1"
+)
+
 func main() {
+	var index bytes.Buffer
+	pwd, _ := os.Getwd()
+	index.WriteString(pwd)
+	index.WriteString("/client/")
+
 	mux := http.NewServeMux()
 
 	// Routes
-	mux.HandleFunc("/copyandpaste", Handlerpaste)
+	mux.Handle("/", http.FileServer(http.Dir(index.String())))
+	mux.HandleFunc("/copyandpaste", HandlerPaste)
 	mux.HandleFunc("/new", HandlerNew)
 	mux.HandleFunc("/resize", HandlerResize)
 	mux.HandleFunc("/submit", HandlerSubmit)
 
 	log.Println("Server starting at", time.Now().Format("15:04:05"), "on", Version)
 	log.Println("Listening on port", PORT)
-	log.Println(http.ListenAndServe(PORT, MiddleWare(mux)))
+	log.Println(http.ListenAndServe(PORT, Middleware(mux)))
 }
 
-// MiddleWare
-func MiddleWare(m http.Handler) http.Handler {
+// Middleware
+func Middleware(m http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != "POST" {
-			log.Println("The server only accpets POST requests")
-			return
-		}
 		m.ServeHTTP(w, r)
 	})
 }
 
 // HandlerNew Handler for a new connexion
 func HandlerNew(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		log.Println("The server only accpets POST requests")
+		return
+	}
+
 	resp := getResp(w, r)
 
 	url := resp["websiteURL"].(string)
@@ -93,8 +101,13 @@ func HandlerNew(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Handlerpaste handler for the copyAndPaste event
-func Handlerpaste(w http.ResponseWriter, r *http.Request) {
+// HandlerPaste handler for the copyAndPaste event
+func HandlerPaste(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		log.Println("The server only accpets POST requests")
+		return
+	}
+
 	resp := getResp(w, r)
 	url := resp["websiteURL"].(string)
 	sess := resp["sessionId"].(string)
@@ -134,6 +147,11 @@ func Handlerpaste(w http.ResponseWriter, r *http.Request) {
 
 // HandlerResize handler for the resize event
 func HandlerResize(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		log.Println("The server only accpets POST requests")
+		return
+	}
+
 	resp := getResp(w, r)
 	url := resp["websiteURL"].(string)
 	sess := resp["sessionId"].(string)
@@ -173,6 +191,11 @@ func HandlerResize(w http.ResponseWriter, r *http.Request) {
 
 // HandlerSubmit handler called when submit button is clicked
 func HandlerSubmit(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		log.Println("The server only accpets POST requests")
+		return
+	}
+
 	resp := getResp(w, r)
 	url := resp["websiteURL"].(string)
 	sess := resp["sessionId"].(string)

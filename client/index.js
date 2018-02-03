@@ -10,7 +10,9 @@ var rtime;
 let uuid = uuidv4()
 var req = {
   url: window.location.href,
-  id: uuid
+  id: uuid,
+  resizeTo: {},
+  resizeFrom: {},
 };
 var timeout = false;
 
@@ -56,11 +58,15 @@ function resizeend() {
 // Set values of the screen dimensions
 function screenResolution() {
   req.eventType = "resize";
+  req.resizeFrom.height = originalHeight.toString();
+  req.resizeFrom.width = originalWidth.toString();
   actualHeight = $(window).height();
-  acutalWidth = $(window).width();
+  actualWidth = $(window).width();
+  req.resizeTo.height = actualHeight.toString();
+  req.resizeTo.width = actualWidth.toString();
   sendData('resize');
-  originalHeight = acutalHeight;
-  oringinalWidth = acutalWidth;
+  originalHeight = actualHeight;
+  originalWidth = actualWidth;
 }
 
 // Detect when user starts typing
@@ -100,12 +106,12 @@ function sendData(route) {
         "paste": (req.eventType == 'copyAndPaste') ? req.pasted : null,
         "formId": (req.eventType == 'copyAndPaste') ? req.formId : null,
         "resizeFrom": (req.eventType == 'resize') ? {
-          "height": originalHeight.toString(),
-          "width": originalWidth.toString()
+          "height": req.resizeFrom.height,
+          "width": req.resizeFrom.width
         } : null,
         "resizeTo": (req.eventType == 'resize') ? {
-          "height": acutalHeight.toString(),
-          "width": actualWidth.toString()
+          "height": req.resizeTo.height,
+          "width": req.resizeTo.width,
         } : null,
         "time": (req.eventType == 'timeTaken') ? req.interval : null
      }
